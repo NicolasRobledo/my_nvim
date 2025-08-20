@@ -1,8 +1,5 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-  },
-  {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
@@ -10,20 +7,26 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
     config = function()
-      require("mason-lspconfig").setup()
-    end,
-  },
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    config = function()
-      require("mason-tool-installer").setup({
+      require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "stylua",
+          "pyright",
+          "html",
+          "cssls",
         },
+        automatic_installation = true,
       })
     end,
   },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("lspconfig").lua_ls.setup({})
+      require("lspconfig").pyright.setup({})
+      require("lspconfig").html.setup({})
+      require("lspconfig").cssls.setup({})
+    end,
+  },
 }
-

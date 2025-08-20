@@ -4,7 +4,8 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd([[colorscheme gruvbox]])
+    -- Aquí llamamos a la configuración real
+    require("config.colors").setup()
   end,
 }
 
